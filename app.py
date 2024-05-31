@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 import datetime
+import pandas as pd
 
 # '''
 # # TaxiFareModel front
@@ -72,6 +73,16 @@ if st.button("Get Fare Prediction"):
         "dropoff_latitude": dropoff_latitude,
         "passenger_count": passenger_count
     }
+
+    def get_map_data():
+        return pd.DataFrame(
+            data = {
+                'lat': [pickup_latitude, dropoff_latitude],
+                'lon': [pickup_longitude, dropoff_longitude]
+            }
+        )
+    df = get_map_data()
+    st.map(df)
 
 # 3. Let's call our API using the `requests` package...
 
